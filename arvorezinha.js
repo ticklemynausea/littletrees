@@ -3,10 +3,12 @@ var usage = "Provides Trees\n\
 Usage\n\
 \n\
     GET /tree\n\
-    Returns to the caller a random-size tree\n\
+    Returns to the caller a random height tree\n\
 \n\
-    GET /tree/size\n\
-    Returns to the caller a tree of the specified size (restrictions apply)\n";
+    GET /tree/height\n\
+    Returns to the caller a tree of the specified height (restrictions apply)\n\
+\n\
+RFC and docs somewhere at http://blol.org";
 
 var maxHeight = 120;
 
@@ -107,20 +109,20 @@ app.get('/tree', function(req, res) {
 
 });
 
-app.get('/tree/:size', function(req, res) {
+app.get('/tree/:height', function(req, res) {
 
     res.set('Content-Type', 'text/plain');
-    if (req.params.size.isInt()) {
+    if (req.params.height.isInt()) {
 
-        if (req.params.size == 0) {
+        if (req.params.height == 0) {
 
-            res.send(String(new LittleTree(req.params.size)));
+            res.send(String(new LittleTree(req.params.height)));
 
-        } else if (req.params.size <= maxHeight) {
+        } else if (req.params.height <= maxHeight) {
 
-            res.send(String(new LittleTree(req.params.size)));
+            res.send(String(new LittleTree(req.params.height)));
 
-        } else if (req.params.size > maxHeight) {
+        } else if (req.params.height > maxHeight) {
 
             res.send(usage);
 
