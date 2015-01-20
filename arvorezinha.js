@@ -100,9 +100,17 @@ var express = require('express')
 
 var app = express()
 
+/* Log connections to console */
+function log(req) {
+    var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
+    console.log(req.method + " " + ip + " - " + req.url);
+}
+
 /* * Routes * */
 
 app.get('/tree', function(req, res) {
+    
+    log(req);
 
     res.set('Content-Type', 'text/plain');
     res.send(String(new LittleTree()));
@@ -110,6 +118,8 @@ app.get('/tree', function(req, res) {
 });
 
 app.get('/tree/:height', function(req, res) {
+    
+    log(req);
 
     res.set('Content-Type', 'text/plain');
     if (req.params.height.isInt()) {
@@ -141,6 +151,38 @@ app.get('/tree/:height', function(req, res) {
 });
 
 app.get('*', function(req, res) {
+
+    log(req);
+
+    res.set('Content-Type', 'text/plain');
+    res.send(usage);
+
+});
+
+
+app.post('*', function(req, res) {
+
+    log(req);
+
+    res.set('Content-Type', 'text/plain');
+    res.send(usage);
+
+});
+
+
+app.put('*', function(req, res) {
+
+    log(req);
+
+    res.set('Content-Type', 'text/plain');
+    res.send(usage);
+
+});
+
+
+app.delete('*', function(req, res) {
+
+    log(req);
 
     res.set('Content-Type', 'text/plain');
     res.send(usage);
