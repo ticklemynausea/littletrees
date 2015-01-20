@@ -124,17 +124,9 @@ app.get('/tree/:height', function(req, res) {
     res.set('Content-Type', 'text/plain');
     if (req.params.height.isInt()) {
 
-        if (req.params.height == 0) {
+        if (req.params.height <= maxHeight && req.params.height >= 0) {
 
             res.send(String(new LittleTree(req.params.height)));
-
-        } else if (req.params.height <= maxHeight) {
-
-            res.send(String(new LittleTree(req.params.height)));
-
-        } else if (req.params.height > maxHeight) {
-
-            res.send(usage);
 
         } else {
 
