@@ -8,7 +8,7 @@ Usage\n\
     GET /tree/height\n\
     Returns to the caller a tree of the specified height (restrictions apply)\n\
 \n\
-RFC and docs somewhere at http://blol.org";
+RFC and docs somewhere at http://blol.org\n";
 
 var maxHeight = 120;
 
